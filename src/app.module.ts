@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -11,10 +12,11 @@ import { DataSource } from 'typeorm';
       username: 'postgres',
       password: 'postgres',
       database: 'booklet',
-      entities: [],
       synchronize: true,
       logging: true,
+      autoLoadEntities: true,
     }),
+    UsersModule,
   ],
   controllers: [],
   providers: [],
