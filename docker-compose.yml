@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:16-alpine
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./docker/postgresql/config/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./docker/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
