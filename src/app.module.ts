@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthorsModule } from './authors/authors.module';
+import { AdminsModule } from './admins/admins.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthorsModule } from './authors/authors.module';
     }),
     UsersModule,
     AuthorsModule,
+    AdminsModule,
   ],
   controllers: [],
   providers: [],
