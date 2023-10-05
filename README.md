@@ -36,7 +36,3 @@ $ npm run test:cov
 
 GET https://localhost:3000/users
 https://typeorm.io/one-to-one-relations
-
-
-1 Author -> TEM -> N Books
-https://typeorm.io/many-to-one-one-to-many-relations

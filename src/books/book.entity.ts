@@ -1,26 +1,24 @@
-import { Book } from 'src/books/book.entity';
+
+import { Author } from 'src/authors/author.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'authors' })
-export class Author {
+@Entity({ name: 'books' })
+export class Book {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'full_name' })
-  fullName: string;
+  @Column()
+  title: string;
 
-  @Column({ unique: true })
-  email: string;
-
-  @OneToMany(() => Book, (book: Book) => book.author)
-  books: Book[];
+  @ManyToOne(() => Author, (author: Author) => author.books)
+  author: Author;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

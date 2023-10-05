@@ -1,7 +1,10 @@
+import { Book } from 'src/books/book.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -16,6 +19,10 @@ export class User {
 
   @Column({ unique: true })
   email: string;
+
+  @ManyToMany(() => Book)
+  @JoinTable()
+  books: Book[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
