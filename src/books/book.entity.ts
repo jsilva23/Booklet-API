@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -17,7 +18,8 @@ export class Book {
   @Column()
   title: string;
 
-  @ManyToOne(() => Author, (author: Author) => author.books)
+  @ManyToOne(() => Author, (author) => author.books)
+  @JoinColumn({ name: 'author_id' })
   author: Author;
 
   @CreateDateColumn({ name: 'created_at' })

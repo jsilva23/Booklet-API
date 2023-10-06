@@ -33,6 +33,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-GET https://localhost:3000/users
-https://typeorm.io/one-to-one-relations
