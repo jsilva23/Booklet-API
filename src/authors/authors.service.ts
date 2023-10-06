@@ -20,6 +20,10 @@ export class AuthorsService {
     return this.authorsRepository.findOneBy({ id });
   }
 
+  findOneByEmail(email: string): Promise<Author | null> {
+    return this.authorsRepository.findOneBy({ email });
+  }
+
   async create(authorDTO: CreateAuthorDTO): Promise<Author> {
     const author = new Author();
     author.fullName = authorDTO.fullName;

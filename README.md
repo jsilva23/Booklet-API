@@ -38,3 +38,8 @@ $ npm run test:cov
 npm install --save bcrypt
 
 npm i argon2
+
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+
+https://github.com/bashleigh/typeorm-polymorphic
