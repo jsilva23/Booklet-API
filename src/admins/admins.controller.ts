@@ -25,17 +25,20 @@ export class AdminsController {
   }
 
   @Get(':id')
-  findOneUser(@Param('id') userId: number) {
-    return this.adminsService.findOne(userId);
+  findOneAdmin(@Param('id') adminId: number) {
+    return this.adminsService.findOne(adminId);
   }
 
   @Patch(':id')
-  updateUser(@Param('id') userId: number, @Body() editUserDTO: EditAdminDTO) {
-    return this.adminsService.update(userId, editUserDTO);
+  updateAdmin(
+    @Param('id') adminId: number,
+    @Body() editAdminDTO: EditAdminDTO,
+  ) {
+    return this.adminsService.update(adminId, editAdminDTO);
   }
 
   @Delete(':id')
-  removeUser(@Param('id') userId: number) {
-    return this.adminsService.remove(userId);
+  removeAdmin(@Param('id') adminId: number) {
+    return this.adminsService.remove(adminId);
   }
 }

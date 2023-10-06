@@ -20,17 +20,17 @@ export class AuthorsController {
   }
 
   @Post()
-  create(@Body() createUserDTO: CreateAuthorDTO) {
-    return this.authorsService.create(createUserDTO);
+  create(@Body() createAuthorDTO: CreateAuthorDTO) {
+    return this.authorsService.create(createAuthorDTO);
   }
 
   @Get(':id')
-  findOneUser(@Param('id') authorId: number) {
+  findOneAuthor(@Param('id') authorId: number) {
     return this.authorsService.findOne(authorId);
   }
 
   @Patch(':id')
-  updateUser(
+  updateAuthor(
     @Param('id') authorId: number,
     @Body() editAuthorDTO: EditAuthorDTO,
   ) {
@@ -38,7 +38,7 @@ export class AuthorsController {
   }
 
   @Delete(':id')
-  removeUser(@Param('id') userId: number) {
-    return this.authorsService.remove(userId);
+  removeAuthor(@Param('id') authorId: number) {
+    return this.authorsService.remove(authorId);
   }
 }
