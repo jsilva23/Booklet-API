@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Book } from 'src/books/book.entity';
 import {
   Column,
@@ -18,6 +19,10 @@ export class Author {
 
   @Column({ unique: true })
   email: string;
+
+  @Exclude()
+  @Column({ name: 'password_hash' })
+  passwordHash: string;
 
   @OneToMany(() => Book, (book: Book) => book.author)
   books: Book[];

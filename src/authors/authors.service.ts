@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as argon2 from 'argon2';
+
 import { Author } from './author.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { CreateAuthorDTO, EditAuthorDTO } from './dto';
@@ -18,10 +20,11 @@ export class AuthorsService {
     return this.authorsRepository.findOneBy({ id });
   }
 
-  create(authorDTO: CreateAuthorDTO): Promise<Author> {
+  async create(authorDTO: CreateAuthorDTO): Promise<Author> {
     const author = new Author();
     author.fullName = authorDTO.fullName;
     author.email = authorDTO.email;
+    author.passwordHash = await argon2.hash(authorDTO.password);
 
     return this.authorsRepository.save(author);
   }

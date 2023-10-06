@@ -1,15 +1,18 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   Param,
   Patch,
   Post,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
 import { EditAuthorDTO, CreateAuthorDTO } from './dto';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('authors')
 export class AuthorsController {
   constructor(private readonly authorsService: AuthorsService) { }
