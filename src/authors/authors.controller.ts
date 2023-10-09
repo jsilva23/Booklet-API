@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
 import { EditAuthorDTO, CreateAuthorDTO } from './dto';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('authors')
@@ -22,6 +23,7 @@ export class AuthorsController {
     return this.authorsService.findAll();
   }
 
+  @Public()
   @Post()
   create(@Body() createAuthorDTO: CreateAuthorDTO) {
     return this.authorsService.create(createAuthorDTO);

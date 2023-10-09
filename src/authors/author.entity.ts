@@ -1,13 +1,15 @@
-import { Exclude } from 'class-transformer';
 import { Book } from 'src/books/book.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Credential } from 'src/credentials/credential.entity';
 
 @Entity({ name: 'authors' })
 export class Author {
@@ -17,12 +19,8 @@ export class Author {
   @Column({ name: 'full_name' })
   fullName: string;
 
-  @Column({ unique: true })
-  email: string;
-
-  @Exclude()
-  @Column({ name: 'password_hash' })
-  passwordHash: string;
+  @OneToOne(() => Credential, (credential) => credential.author)
+  credential: Credential;
 
   @OneToMany(() => Book, (book: Book) => book.author)
   books: Book[];

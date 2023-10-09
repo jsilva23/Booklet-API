@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
-import { Repository, UpdateResult } from 'typeorm';
+import { DataSource, Repository, UpdateResult } from 'typeorm';
 import { CreateUserDTO, EditUserDTO } from './dto';
+import { CredentialRole } from 'src/credentials/credential_role';
+import { Credential } from 'src/credentials/credential.entity';
+import * as argon2 from 'argon2';
 
 @Injectable()
 export class UsersService {
   constructor(
+    private dataSource: DataSource,
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) { }
 
@@ -18,12 +22,26 @@ export class UsersService {
     return this.usersRepository.findOneBy({ id });
   }
 
-  create(userDTO: CreateUserDTO): Promise<User> {
+  async create(
+    userDTO: CreateUserDTO,
+  ): Promise<{ user: User; credential: Credential }> {
     const user = new User();
     user.fullName = userDTO.fullName;
-    user.email = userDTO.email;
 
-    return this.usersRepository.save(user);
+    await this.dataSource.transaction(async (transactionEntityManager) => {
+      await transactionEntityManager.save(user);
+
+      const credential = new Credential();
+      credential.email = userDTO.email;
+      credential.passwordHash = await argon2.hash(userDTO.password);
+      credential.credentialableId = user.id;
+      credential.credentialableType = 'user';
+      credential.role = CredentialRole.USER;
+
+      await transactionEntityManager.save(credential);
+    });
+
+    return { user: user, credential: user.credential };
   }
 
   update(id: number, userDTO: EditUserDTO): Promise<UpdateResult> {

@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { AdminsService } from './admins.service';
 import { CreateAdminDTO, EditAdminDTO } from './dto';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Controller('admins')
 export class AdminsController {
@@ -19,6 +20,7 @@ export class AdminsController {
     return this.adminsService.findAll();
   }
 
+  @Public()
   @Post()
   create(@Body() createAdminDTO: CreateAdminDTO) {
     return this.adminsService.create(createAdminDTO);

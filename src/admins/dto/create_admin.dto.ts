@@ -6,4 +6,7 @@ export class CreateAdminDTO {
 
   @IsEmail()
   email: string;
+
+  @IsNotEmpty()
+  password: string
 }

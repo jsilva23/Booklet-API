@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDTO, EditUserDTO } from './dto';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Controller('users')
 export class UsersController {
@@ -19,6 +20,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Public()
   @Post()
   create(@Body() createUserDTO: CreateUserDTO) {
     return this.usersService.create(createUserDTO);

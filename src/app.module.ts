@@ -6,6 +6,7 @@ import { AuthorsModule } from './authors/authors.module';
 import { AdminsModule } from './admins/admins.module';
 import { BooksModule } from './books/books.module';
 import { AuthModule } from './auth/auth.module';
+import { CredentialsModule } from './credentials/credentials.module';
 
 @Module({
   imports: [
@@ -24,10 +25,10 @@ import { AuthModule } from './auth/auth.module';
     AuthorsModule,
     AdminsModule,
     BooksModule,
+    CredentialsModule,
     AuthModule,
   ],
   controllers: [],
-  providers: [],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) { }

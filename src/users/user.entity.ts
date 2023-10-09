@@ -5,9 +5,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Credential } from 'src/credentials/credential.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -17,8 +19,8 @@ export class User {
   @Column({ name: 'full_name' })
   fullName: string;
 
-  @Column({ unique: true })
-  email: string;
+  @OneToOne(() => Credential, (credential) => credential.user)
+  credential: Credential;
 
   @ManyToMany(() => Book)
   @JoinTable()

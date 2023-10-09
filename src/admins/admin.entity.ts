@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Credential } from 'src/credentials/credential.entity';
 
 @Entity({ name: 'admins' })
 export class Admin {
@@ -14,8 +16,8 @@ export class Admin {
   @Column({ name: 'full_name' })
   fullName: string;
 
-  @Column({ unique: true })
-  email: string;
+  @OneToOne(() => Credential, (credential) => credential.admin)
+  credential: Credential;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
