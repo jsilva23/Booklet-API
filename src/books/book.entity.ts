@@ -27,4 +27,7 @@ export class Book {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @Column({ default: false })
+  accepted: boolean;
 }
